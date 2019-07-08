@@ -1,0 +1,11 @@
+{
+  "name": "typescript-workshop",
+  "version": "1.0.0",
+  "description": "A workshop to explore the basic capabilities of typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emmet Murray",
+  "license": "GPL-3.0-only"
+}
