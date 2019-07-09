@@ -7,13 +7,17 @@ function f(a: number, b: number[]): number[] {
     return b.unshift(a) && b;
 }
 
-// Sum types
-
-let z: number | string = 1;
+// Union types
+let z: number | string;
+z = 1;
 z = "Lmao";
 // z = [1,2,3]; - Not allowed!
 
-// Any
+// Intersection types
+type IntsAndStrings = number & string;
+
+
+// any
 function log(input: any) {
     console.log(input.name);
 }
@@ -23,11 +27,6 @@ let obj = {
 };
 log(obj);
 
-// never
-function willDefinitelyFail(message: string): never {
-    // do some stuff
-    throw "Fail!";
-}
 
 // unknown
 let u: unknown = {
@@ -42,3 +41,37 @@ if (hasName(u)) {
     // inside here, we know u has the correct type!
     console.log(u.name);
 }
+
+// never
+function willDefinitelyFail(message: string): never {
+    // do some stuff
+    throw "Fail!";
+}
+
+// value types
+type SomeVals = "a" | "b" | "c" | 1;
+
+let s: SomeVals;
+s = "a";
+
+let sw = (x: SomeVals): boolean => {
+    switch (x){
+        case "a":
+            return true;
+        case "b":
+            return false;
+        case "c":
+            return true;
+        case 1:
+            return false;
+    }
+
+    let unreachable = (x : never): never => {
+        throw "Unreachable";
+    }
+
+    // We'll get a compiler error here if we forgot a value above!
+    throw unreachable(x);
+}
+
+sw(s);
