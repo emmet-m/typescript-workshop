@@ -1,5 +1,5 @@
 interface Message {
-    content: string | number;
+    content?: string | number;
     sender: string;
     receiver: string;
     send: (m: Message) => boolean;
@@ -18,3 +18,16 @@ let m: Message = {
 };
 
 m.send(m);
+
+
+// enable --strictNullChecks
+function logContent(m: string | number) {
+    console.log(m);
+}
+
+if(m.content) {
+    logContent(m.content);
+}
+
+// If time allows
+type Fields = keyof Message;
