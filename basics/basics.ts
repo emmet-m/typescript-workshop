@@ -2,10 +2,20 @@
 let x = 1; 
 let y: number = 1;
 
-// Function types
+// Functions with types
 function f(a: number, b: number[]): number[] {
-    return b.unshift(a) && b;
+    b.unshift(a);
+    return b;
 }
+
+// The type of a function
+let fn: (arg: number, anotherArg: number) => string;
+
+fn = function(arg: number, anotherArg: number) {
+    return arg.toString();
+}
+
+console.log(fn(1,2));
 
 // Union types
 let z: number | string;
@@ -13,65 +23,21 @@ z = 1;
 z = "Lmao";
 // z = [1,2,3]; - Not allowed!
 
+
+// Value types
+type Bit = 0 | 1;
+let bit: Bit = 1;
+
+type Family  = "Emmet" | "Evan" | "Hana" | "Mum" | "Dad"; 
+type Friends = "Hana"  | "Evan" | "Nick" | "Ollie";
+
+
 // Intersection types
+type FamilyAndFriend = Family & Friends;
+
+let f1: FamilyAndFriend = "Hana";
+// let f2: FamilyAndFriend = "Mum"; - this won't compile!
+
+// This type has no inhabitants - there's nothing that's 
+// both a string and a number!
 type IntsAndStrings = number & string;
-
-
-// any
-function log(input: any) {
-    console.log(input.name);
-}
-
-let obj = {
-    name: "Hello!"
-};
-log(obj);
-
-
-// unknown
-let u: unknown = {
-    name: "hello!"
-};
-
-function hasName(arg: any): arg is {name: string} {
-    return !!arg && typeof arg === "object" && "name" in arg;
-}
-
-if (hasName(u)) {
-    // inside here, we know u has the correct type!
-    console.log(u.name);
-}
-
-// never
-function willDefinitelyFail(message: string): never {
-    // do some stuff
-    throw "Fail!";
-}
-
-// value types
-type SomeVals = "a" | "b" | "c" | 1;
-
-let s: SomeVals;
-s = "a";
-
-let sw = (x: SomeVals): boolean => {
-    switch (x){
-        case "a":
-            return true;
-        case "b":
-            return false;
-        case "c":
-            return true;
-        case 1:
-            return false;
-    }
-
-    let unreachable = (x : never): never => {
-        throw "Unreachable";
-    }
-
-    // We'll get a compiler error here if we forgot a value above!
-    throw unreachable(x);
-}
-
-sw(s);
