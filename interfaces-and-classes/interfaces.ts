@@ -1,3 +1,5 @@
+// interfaces can be implemented, extended and augmented
+
 interface Message {
     content?: string | number;
     sender: string;

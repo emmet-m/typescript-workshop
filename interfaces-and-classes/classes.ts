@@ -1,4 +1,6 @@
 
+// classes can have private members, constructors, etc.
+
 class Message2<T> {
     constructor(private content: T,
                 private sender: string,
